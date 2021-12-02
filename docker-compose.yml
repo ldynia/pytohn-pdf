@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  app:
+    image: bitnami/prometheus:2.30.0
+    hostname: app-pdf
+    container_name: app-pdf
+    image: python:3.9-slim
+    working_dir: /app
+    volumes:
+      - ./app:/app
+    command: sh -c "sleep 1d"
+
