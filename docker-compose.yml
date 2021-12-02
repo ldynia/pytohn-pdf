@@ -8,5 +8,5 @@ services:
     working_dir: /app
     volumes:
       - ./app:/app
-    command: sh -c "sleep 1d"
+    command: sh -c "pip install -r /app/requirements.txt & sleep 1d"
 
