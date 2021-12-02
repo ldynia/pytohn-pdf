@@ -4,6 +4,6 @@ Python PDF generator
 
 ```bash
 $ docker-compose up
-$ pyton main -fn Jhon_Do
+$ pyton main.py -fn Jhon_Do
 ```
 
