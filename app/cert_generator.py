@@ -1,16 +1,17 @@
 from fpdf import FPDF
 
-
+# A4
 PDF_WIDTH_MM = 297
 PDF_HEIGHT_MM = 210
-LETTER_WIDTH_MM = 3.4
 
+COLOR_BLACK = (0, 0, 0)
+COLOR_BLUE = (15, 2, 70)
 COLOR_GREEN_1 = (98, 122, 110)
 COLOR_GREEN_2 = (99, 129, 113)
 COLOR_GREEN_3 = (32, 65, 49)
 
 
-def txt_to_mm(txt):
+def txt_to_mm(txt, LETTER_WIDTH_MM=3.4):
     return int(len(txt) * LETTER_WIDTH_MM)
 
 
@@ -29,8 +30,14 @@ class CertGenerator(FPDF):
         self.draw_footer()
 
     def set_up_page(self):
+        # Create page
         self.add_page()
-        self.image('/app/assets/bg1.png', x=0, y=0, w=PDF_WIDTH_MM, h=PDF_HEIGHT_MM)
+
+        # Set page color by choosing background image.
+        if self.metadata['background'] == 'green':
+            self.image('/app/assets/bg1.png', x=0, y=0, w=PDF_WIDTH_MM, h=PDF_HEIGHT_MM)
+
+        # Set graphics
         self.set_draw_color(*COLOR_GREEN_3)
         self.image('/app/assets/ornament_left.png', x=10, y=10)
         self.image('/app/assets/ornament_right.png', x=PDF_WIDTH_MM-42, y=10)
@@ -56,21 +63,28 @@ class CertGenerator(FPDF):
         self.line(7, PDF_HEIGHT_MM-7, PDF_WIDTH_MM-7, PDF_HEIGHT_MM-7)
 
     def draw_header(self):
-        self.set_font('Times', 'I', 32)
-        self.text(85, PDF_HEIGHT_MM/2 - 20, 'Certificate of Achievement')
+        self.set_font('Times', 'I', 46)
+        self.text(85, PDF_HEIGHT_MM/2 - 20, self.metadata['header'])
 
     def draw_name(self):
         self.set_font('Arial', 'B', 32)
+        self.set_text_color(*COLOR_BLUE)
         name = self.metadata['full_name']
         offset = PDF_WIDTH_MM/2 - txt_to_mm(name)
-        self.text(offset, PDF_HEIGHT_MM/2, name)
+        self.text(offset, PDF_HEIGHT_MM/2 + 3, name)
 
     def draw_body(self):
-        self.set_font('Times', '', 28)
-        self.text(75, PDF_HEIGHT_MM/2 + 20, self.metadata['text'])
-        self.text(60, PDF_HEIGHT_MM/2 + 30, self.metadata['tilte'])
+        self.set_font('Times', '', 24)
+        self.set_text_color(*COLOR_BLACK)
+        self.text(97, PDF_HEIGHT_MM/2 + 20, self.metadata['text'])
+        self.set_font('Arial', 'B', 28)
+        self.set_text_color(*COLOR_BLUE)
+        self.text(75, PDF_HEIGHT_MM/2 + 40, self.metadata['tilte'])
 
     def draw_footer(self):
         self.set_font('Times', '', 20)
+        self.set_text_color(*COLOR_BLACK)
         self.text(15, PDF_HEIGHT_MM - 15, self.metadata['date'])
-        self.text(PDF_WIDTH_MM - 60, PDF_HEIGHT_MM - 15, self.metadata['uuid'])
+
+        if self.metadata['uuid']:
+            self.text(PDF_WIDTH_MM - 60, PDF_HEIGHT_MM - 15, self.metadata['uuid'])
