@@ -1,9 +1,13 @@
 # Installation
 
-Python PDF generator
+```bash
+$ docker-compose up -d
+```
+
+# Execution
 
 ```bash
-$ docker-compose up
-$ pyton main.py -fn Jhon_Do
+$ docker exec app-pdf python main.py -fn Jhon_Do
+$ evince app/certs/test.pdf
 ```
 
