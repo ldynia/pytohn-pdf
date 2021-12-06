@@ -81,7 +81,7 @@ class CertGenerator(FPDF):
         # Draw title
         self.set_font('Arial', 'B', 28)
         self.set_text_color(*COLOR_BLUE)
-        self.text(75, PDF_HEIGHT_MM/2 + 40, self.metadata['tilte'])
+        self.text(75, PDF_HEIGHT_MM/2 + 40, self.metadata['title'])
 
     def draw_footer(self):
         # Draw date

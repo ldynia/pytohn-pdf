@@ -16,8 +16,8 @@ def generate_pdf(background, full_name, date, uuid):
         'background': background,
         'header': 'Course Certificate',
         'full_name': full_name.replace('_', ' '),
-        'text': 'has seccessfully completed',
-        'tilte': 'Basic Pharmacovigilance Test',
+        'text': 'has successfully completed',
+        'title': 'Basic Pharmacovigilance Test',
         'date': date,
         'uuid': uuid,
     }
