@@ -74,17 +74,21 @@ class CertGenerator(FPDF):
         self.text(offset, PDF_HEIGHT_MM/2 + 3, name)
 
     def draw_body(self):
+        # Draw text
         self.set_font('Times', '', 24)
         self.set_text_color(*COLOR_BLACK)
         self.text(97, PDF_HEIGHT_MM/2 + 20, self.metadata['text'])
+        # Draw title
         self.set_font('Arial', 'B', 28)
         self.set_text_color(*COLOR_BLUE)
         self.text(75, PDF_HEIGHT_MM/2 + 40, self.metadata['tilte'])
 
     def draw_footer(self):
+        # Draw date
         self.set_font('Times', '', 20)
         self.set_text_color(*COLOR_BLACK)
         self.text(15, PDF_HEIGHT_MM - 15, self.metadata['date'])
 
+        # Draw uuid
         if self.metadata['uuid']:
             self.text(PDF_WIDTH_MM - 60, PDF_HEIGHT_MM - 15, self.metadata['uuid'])

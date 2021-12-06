@@ -13,12 +13,12 @@ from cert_generator import CertGenerator
 @click.option('-u', '--uuid', help='UUID')
 def generate_pdf(background, full_name, date, uuid):
     metadata = {
-        'full_name': full_name.replace('_', ' '),
+        'background': background,
         'header': 'Course Certificate',
+        'full_name': full_name.replace('_', ' '),
         'text': 'has seccessfully completed',
         'tilte': 'Basic Pharmacovigilance Test',
         'date': date,
-        'background': background,
         'uuid': uuid,
     }
     pdf = CertGenerator(metadata=metadata, orientation='L', unit='mm', format='A4')
