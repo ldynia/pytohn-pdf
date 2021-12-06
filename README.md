@@ -9,5 +9,6 @@ $ docker-compose up -d
 ```bash
 $ docker exec app-pdf python main.py -fn Jhon_Do
 $ evince app/certs/test.pdf
+$ docker exec app-pdf python send_email.py
 ```
 
